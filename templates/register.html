@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+        }
+        input {
+            width: 100%;
+            padding: 3px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ffaad4;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #ff007f;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    {% extends "navbar.html" %}
+    {% block content %}
+        <h2>Kayıt Ol</h2>
+    
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="id_username">Kullanıcı Adı:</label>
+            <input type="text" name="username" id="id_username" required>
+            
+            <label for="id_first_name">Ad:</label>
+            <input type="text" name="first_name" id="id_first_name" required>
+            
+            <label for="id_last_name">Soyadı:</label>
+            <input type="text" name="last_name" id="id_last_name" required>
+            
+            <label for="id_email">E-Posta:</label>
+            <input type="email" name="email" id="id_email" required>
+        
+            <label for="id_password1">Şifre:</label>
+            <input type="password" name="password1" id="id_password1" required>
+        
+            <label for="id_password2">Şifre (Tekrar):</label>
+            <input type="password" name="password2" id="id_password2" required>
+        
+            <button type="submit">Kayıt Ol</button>
+</form>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        {% endfor %}
+{% endif %}
+
+
+        
+        <p>Zaten bir hesabın var mı? <a href="{% url 'login' %}">Giriş Yap</a></p>
+    {% endblock %}
+
+</body>
+</html>
+

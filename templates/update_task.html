@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görev Güncelle</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ffaad4;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff007f;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .checkbox-group label {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    {% extends "navbar.html" %}
+    {% block content %}
+        <div class="container">
+            <h1>Görev Güncelle</h1>
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="title">Başlık:</label>
+                    <input type="text" id="title" name="title" value="{{ task.title }}" required placeholder="Görev başlığını güncelleyin...">
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Açıklama:</label>
+                    <textarea id="description" name="description" placeholder="Görev hakkında açıklamayı güncelleyin...">{{ task.description }}</textarea>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="completed" name="completed" {% if task.completed %}checked{% endif %}>
+                    <label for="completed">Tamamlandı mı?</label>
+                </div>
+                
+                <button type="submit">Kaydet</button>
+            </form>
+        </div>
+    {% endblock %}
+
+</body>
+</html>
+

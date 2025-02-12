@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görev Yönetimi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: plum;
+            padding: 15px 30px;
+        }
+
+        .navbar .left a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .navbar .left a:hover {
+            color: pink;
+        }
+
+        .navbar .right {
+            color: white;
+            font-size: 16px;
+        }
+
+        .profile-info {
+            float: right;
+            color: white;
+            padding: 14px 20px;
+        }
+        .container {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgb(134, 14, 14);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="{% url 'task_list' %}">Ana Sayfa</a>
+        <a href="{% url 'create_task' %}">Görev Ekle</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'profil' %}" class="navbar-right">Profil</a>
+            <a href="{% url 'logout' %}" class="navbar-right">Çıkış Yap</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="navbar-right">Giriş Yap</a>
+            <a href="{% url 'register' %}" class="navbar-right">Kayıt Ol</a>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

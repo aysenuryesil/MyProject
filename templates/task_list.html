@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görev Listesi</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ffaad4;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            background-color: #f1f1f1;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        li:hover {
+            background-color: #e9ecef;
+        }
+        .task-info {
+            flex-grow: 1;
+            font-size: 1rem;
+        }
+        .task-actions a {
+            margin-left: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #000000;
+            transition: color 0.3s;
+        }
+        .task-actions a:hover {
+            color: #000000;
+        }
+        .delete-action {
+            color: red;
+        }
+        .task-actions a.delete-action:hover {
+            color: darkred;
+        }
+        .user-info {
+            background-color: #f1f1f1;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-info p {
+            margin: 0;
+        }
+        .user-info a {
+            font-weight: bold;
+            color: #000000;
+        }
+        .new-task-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff007f;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .new-task-btn:hover {
+            background-color: #ff007f;
+        }
+    </style>
+</head>
+<body>
+    {% extends "navbar.html" %}
+    {% block content %}
+        <header>
+            <h1>Görev Listesi</h1>
+        </header>
+    
+        <div class="container">
+            <ul>
+                {% for task in tasks %}
+                <li>
+                    <div class="task-info">
+                        <strong>{{ task.title }}</strong> - {{ task.description }}
+                    </div>
+                    <div class="task-actions">
+                        <a href="{% url 'update_task' task_id=task.id %}">Düzenle</a>
+                        <a href="{% url 'delete_task' task_id=task.id %}" class="delete-action">Sil</a>
+                    </div>
+                </li>
+                {% empty %}
+                    <p>Henüz görev eklenmemiş.</p>
+                {% endfor %}
+            </ul>
+    
+            <a href="{% url 'create_task' %}" class="new-task-btn">+ Yeni Görev Ekle</a>
+    
+
+        </div>
+    {% endblock %}
+</body>
+</html>
+
+

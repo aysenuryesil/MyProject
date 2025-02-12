@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoşgeldiniz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .welcome-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .welcome-title {
+            color: #343a40;
+            font-weight: bold;
+        }
+        .btn-logout {
+            background-color: #ffaad4;
+            color: white;
+            margin-top: 20px;
+        }
+        .btn-logout:hover {
+            background-color: #ffaad4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-container">
+            <h2 class="welcome-title">Hoşgeldiniz, {{ user.username }}! 👋</h2>
+            <p class="lead">Başarıyla giriş yaptınız. </p>
+            <a href="{% url 'logout' %}" class="btn btn-logout">Çıkış Yap</a>
+        </div>
+    </div>
+</body>
+</html>
+

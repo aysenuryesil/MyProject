@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .btn-login {
+            width: 100%;
+            background-color: #ffaad4;
+            color: white;
+        }
+        .btn-login:hover {
+            background-color: #ffaad4;
+        }
+        .register-link {
+            text-align: center;
+            display: block;
+            margin-top: 15px;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div class="container">
+        <div class="login-container">
+            <h3 class="login-title">Giriş Yap</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Kullanıcı Adı</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Şifre</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-login">Giriş Yap</button>
+            </form>
+            <p>Hesabın yok mu? <a href="{% url 'register' %}">Kayıt Ol</a></p>
+        </div>
+    </div>
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-danger">
+                <strong>Error: </strong>{{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+</body>
+</html>
