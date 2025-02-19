@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-5v5_mx%2rb^$)4dsk76f!s00$_&e1inu3=$5e0tsux@0@5+ilk
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ['*', 'localhost']
 
 
 # Application definition
@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'MyProject',
     'tasks',
     'accounts',
+    'api',
     'rest_framework',
-    'rest_framework.authtoken',
+    
 
 ]
 
@@ -54,6 +55,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.DjangoModelPermissions',
+    )
 }
 
 
