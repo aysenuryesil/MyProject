@@ -5,7 +5,6 @@ from rest_framework import viewsets
 from .models import Task
 from django.shortcuts import get_object_or_404
 
-from .serializers import TaskSerializer
 
 
 @login_required
@@ -37,9 +36,5 @@ def delete_task(request, task_id):
         return redirect('task_list')
     return render(request, 'delete_task.html', {'task': task})
 
-class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-    def get_queryset(self):
-        return Task.objects.filter(user=self.request.user)
+
 
