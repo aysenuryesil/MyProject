@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tasks .models import Task
+from accounts .models import Profile  
 
 

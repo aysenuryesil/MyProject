@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-5v5_mx%2rb^$)4dsk76f!s00$_&e1inu3=$5e0tsux@0@5+ilk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 CORS_ORIGIN_ALLOW_ALL = True
-ALLOWED_HOSTS = ['*', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -60,7 +60,13 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.DjangoModelPermissions',
-    )
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
 
 }
 
@@ -73,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'MyProject.urls'
@@ -142,7 +149,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

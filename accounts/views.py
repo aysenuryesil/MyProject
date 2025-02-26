@@ -31,6 +31,9 @@ def login_view(request):
         form = AuthenticationForm()
     return render (request, 'login.html',{'form':form})
 
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 
 @login_required
@@ -38,9 +41,7 @@ def task_list(request):
     tasks=Task.objects.filter(user=request.user)
     return render(request,'task_list.html',{'tasks':tasks})
 
-def logout_view(request):
-    logout(request)
-    return redirect('login')
+
 
 def home(request):
     if not request.user.is_authenticated:
