@@ -15,6 +15,10 @@ from django.contrib import messages
 from datetime import timedelta
 import os
 import dj_database_url
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,8 +33,8 @@ SECRET_KEY = 'django-insecure-5v5_mx%2rb^$)4dsk76f!s00$_&e1inu3=$5e0tsux@0@5+ilk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 CORS_ORIGIN_ALLOW_ALL = True
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ['myproject-w1nz.onrender.com']
+CSRF_TRUSTED_ORIGINS = ["https://myproject-w1nz.onrender.com"]
 
 # Application definition
 
@@ -47,6 +51,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'rest_framework_simplejwt',
+    'app',
     
 
 ]
@@ -110,14 +115,8 @@ WSGI_APPLICATION = 'MyProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-
-    },
     'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
-        conn_max_age=600
+        default=os.getenv("DATABASE_URL")
     )
 }
 
