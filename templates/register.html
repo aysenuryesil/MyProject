@@ -46,6 +46,22 @@
             color: blue;
             text-decoration: none;
         }
+        .message-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .message-box {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -75,21 +91,20 @@
             <input type="password" name="password2" id="id_password2" required>
         
             <button type="submit">Kayıt Ol</button>
-</form>
+        </form>
 
         {% if messages %}
-            {% for message in messages%}
-                <script>
-                    alert('{{message}}');
-                </script>
-            {% endfor %}
+            <div class="message-container">
+                {% for message in messages %}
+                    <div class="message-box">
+                        <h1>{{ message }}</h1>
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
-
-
         
         <p>Zaten bir hesabın var mı? <a href="{% url 'login' %}">Giriş Yap</a></p>
     {% endblock %}
 
 </body>
 </html>
-
