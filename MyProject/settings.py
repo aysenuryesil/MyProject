@@ -16,6 +16,7 @@ from datetime import timedelta
 import os
 import dj_database_url
 import environ
+from django.contrib.messages import constants as messages
 
 env = environ.Env()
 environ.Env.read_env()
@@ -115,9 +116,7 @@ WSGI_APPLICATION = 'MyProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv("DATABASE_URL")
-    )
+    'default': dj_database_url.config(default='postgresql://mydatabase_fawv_user:x25a2uaUYSSHe898iiIpvtzHF8ZXYcd6@dpg-cv6scinnoe9s73c29seg-a.oregon-postgres.render.com/mydatabase_fawv')
 }
 
 
@@ -169,10 +168,11 @@ ALLOWED_HOSTS = ['*']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MESSAGE_TAGS = {
-    messages.ERROR: "danger",
-    messages.SUCCESS: "success",
-    messages.WARNING: "warning",
-    messages.INFO: "info",
+    messages.DEBUG: 'secondary',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',  
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger', 
 }
 
 

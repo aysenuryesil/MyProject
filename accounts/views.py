@@ -58,7 +58,7 @@ def register_view(request):
         password1 = request.POST["password1"]
         password2 = request.POST["password2"]
 
-        if password1 != password2:
+        if password1 != password2 :
             messages.error(request,'Şifreler uyuşmuyor!!!')
             return redirect('register')
 
@@ -79,7 +79,7 @@ def register_view(request):
                 password=password1
             )
             user.save()
-            messages.success(request,"Başarıyla kayıt oldunuz! Giriş yapabilirsiniz.")
+            messages.success(request, "Tebrikler! Başarıyla kayıt oldunuz.")
             return redirect("login")
 
     return render(request, "register.html")
